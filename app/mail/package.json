@@ -1,0 +1,11 @@
+{
+  "name": "mail",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "description": "邮件工作台：正文图片识别、邮件排版还原、历史签名、AI润色与回复、联系人、草稿与本地跟进；个人风格只学习一次，人工确认发送。",
+  "license": "AGPL-3.0",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  }
+}

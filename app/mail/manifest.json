@@ -1,0 +1,47 @@
+{
+  "manifestVersion": 2,
+  "id": "mail",
+  "name": "Mail",
+  "version": "1.0.1",
+  "description": "多邮箱阅读、邮件总结、草稿、联系人与工作日历；发送前由你确认。",
+  "minAppVersion": "1.5.48-beta",
+  "entry": "index.js",
+  "icon": "assets/icon.svg",
+  "capabilities": [
+    "app/tools.expose-to-model",
+    "app/runtime.execute",
+    "app/runtime.native",
+    "app/runtime.network",
+    "app/models.infer"
+  ],
+  "contributes": {
+    "cards": [
+      {
+        "id": "main",
+        "title": "Mail",
+        "description": "当日反馈 · 邮件阅读 · AI 润色与回复 · 联系人与草稿",
+        "route": "/mail.html",
+        "cardForm": "structural",
+        "realization": "page",
+        "siteNavEntry": true,
+        "face": {
+          "image": "assets/cover.svg"
+        },
+        "pageIcon": "assets/nav.svg"
+      }
+    ]
+  },
+  "network": {
+    "allowedHosts": [
+      "www.nmc.cn",
+      "api.met.no",
+      "myip.ipip.net"
+    ],
+    "methods": [
+      "GET"
+    ],
+    "allowLocalhost": false,
+    "defaultTimeoutMs": 7500,
+    "maxResponseBytes": 5242880
+  }
+}

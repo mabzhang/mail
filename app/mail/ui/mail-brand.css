@@ -1,0 +1,31 @@
+.mail-brand-mark {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #edf3ee;
+  box-shadow: none;
+}
+.mail-brand-mark img {display:block;width:100%;height:100%;}
+.brand-home {
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:13px;
+  background:transparent!important;
+  border:0!important;
+  padding:0!important;
+  box-shadow:none!important;
+  text-align:left;
+}
+.brand-home>div {display:flex;flex-direction:column;}
+.brand-home b {font-size:17px;letter-spacing:.12em;color:#edf3ee;}
+.brand-home small {font-size:10px;letter-spacing:.08em;color:#9aaca7;}
+.sidebar-brand {padding-bottom:25px;}
+.brand-home:focus-visible {outline:2px solid #aec599;outline-offset:5px;border-radius:10px;}
+@media(max-width:1000px) {
+  .brand-home>div {display:none;}
+  .mail-brand-mark {width:30px;height:30px;border-radius:8px;}
+  .sidebar-brand {padding-left:8px;}
+}

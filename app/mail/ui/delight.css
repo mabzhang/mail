@@ -1,0 +1,668 @@
+/* Mail Mail: a quiet day ribbon, tactile actions and a complete evening palette.
+   Icons are supplied by the UI's local Lucide assets; this sheet draws no icons. */
+body {
+  --delight-surface: #ffffffd9;
+  --delight-solid: #fff;
+  --delight-soft: #f1f5f0;
+  --delight-line: #dfe6dc;
+  --delight-ink: #34463b;
+  --delight-muted: #6e7c71;
+  --delight-faint: #8e9a91;
+  --delight-accent: #65876c;
+  --delight-accent-soft: #e8f1e5;
+  --delight-warm: #ad8550;
+  --delight-shadow: 0 8px 26px #2536290a, 0 1px 3px #25362905;
+  --delight-glide: cubic-bezier(.16, 1, .3, 1);
+  color-scheme: light;
+}
+
+/* The dialog owns the footer row; only the contact lists may grow or scroll. */
+.contact-dialog {grid-template-columns:minmax(0,62%) minmax(0,38%);grid-template-rows:minmax(0,1fr);max-height:88dvh;}
+.contact-left {min-height:0;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr);}
+.contact-layout {height:auto;min-height:0;grid-template-columns:minmax(100px,180px) minmax(0,1fr);}
+.contact-layout aside,.contact-results {min-height:0;min-width:0;overscroll-behavior:contain;}
+.contact-row>div {min-width:0;overflow-wrap:anywhere;}
+.contact-chosen {min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;}
+.chosen-list {min-height:0;min-width:0;overscroll-behavior:contain;}
+.contact-targets {flex-wrap:wrap;gap:6px;}
+.contact-targets>button {padding:9px 10px;min-width:0;font-size:12px;}
+.contact-picker-footer {min-height:48px;padding-top:10px;flex-shrink:0;border-top:1px solid var(--line);background:inherit;}
+.contact-picker-footer>button {min-height:40px;}
+/* The brand was moved inside a button: constrain that nested content in rail mode. */
+.sidebar {overflow-x:hidden;}
+.sidebar-brand {min-width:0;max-width:100%;}
+.sidebar-brand .brand-home {min-width:0;max-width:100%;width:100%;}
+.brand-home>div {min-width:0;flex:1;}
+.sidebar-collapsed .brand-home>div {display:none!important;}
+.sidebar-collapsed .sidebar-brand {padding-left:7px;padding-right:7px;}
+.sidebar-collapsed .brand-home {justify-content:center;gap:0;}
+.top [data-toggle-sidebar] {position:relative;z-index:4;flex-shrink:0;}
+.brand-account-window {display:block;position:relative;height:28px;overflow:hidden;width:100%;margin-top:3px;}
+.brand-account-window .brand-email-row {position:absolute;inset:0;display:flex;align-items:center;font-size:9.5px;line-height:14px;letter-spacing:0;color:#b4c6bc;overflow-wrap:anywhere;margin:0;}
+@media(max-width:800px){.contact-dialog{grid-template-columns:minmax(0,60%) minmax(0,40%)}.contact-layout{grid-template-columns:minmax(78px,105px) minmax(0,1fr)}.contact-targets>button{font-size:10px;padding:7px 5px}.contact-left,.contact-chosen{padding:10px}.contact-results{padding-left:8px}.contact-row{padding:9px 3px;gap:6px}}
+
+/* A compact place for context, without taking space from the day's work. */
+.day-ribbon {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(135px, .9fr) minmax(155px, 1fr) minmax(150px, 1fr) minmax(165px, 1.2fr);
+  align-items: center;
+  gap: 0;
+  margin: -8px 0 23px;
+  padding: 12px 5px;
+  min-width: 0;
+  border: 1px solid var(--delight-line);
+  border-radius: 16px;
+  background: linear-gradient(105deg, #f9fbf6e8, var(--delight-surface) 62%);
+  box-shadow: 0 2px 11px #263b2a03;
+  color: var(--delight-ink);
+  font-size: 12px;
+  line-height: 1.5;
+  isolation: isolate;
+}
+.day-ribbon > :is(div, button) {
+  min-width: 0;
+  padding: 3px 15px;
+}
+.day-ribbon > :is(div, button) + :is(div, button) {
+  border-left: 1px solid var(--delight-line);
+}
+.day-ribbon :is(.ui-icon, svg) {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  color: var(--delight-accent);
+}
+.day-ribbon-time {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  column-gap: 8px;
+  align-items: center;
+}
+.day-ribbon-time > :is(svg, .ui-icon) { grid-row: 1 / 3; }
+.day-ribbon-time > div { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.day-clock {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: .01em;
+  font-variant-numeric: tabular-nums;
+}
+.day-date { display: block; color: var(--delight-muted); font-size: 11px; margin-top: 4px; line-height: 1.5; }
+.day-ribbon-weather,
+.day-ribbon-next {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 9px;
+  width: 100%;
+  min-height: 45px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--delight-ink);
+  box-shadow: none;
+  text-align: left;
+}
+.day-ribbon button:hover:not(:disabled) {
+  background: var(--delight-soft);
+  border-color: var(--delight-line);
+  box-shadow: none;
+  transform: none;
+}
+.day-ribbon button:active:not(:disabled) { transform: none; }
+.day-ribbon button:focus-visible { outline: 2px solid var(--delight-accent); outline-offset: -3px; }
+.day-ribbon-weather > div,
+.day-ribbon-next > div { min-width: 0; flex: 1; }
+.day-ribbon-weather :is(.citylabel, .city-label, .sky-city-label, .day-city) {
+  font-size: 12px;
+  font-weight: 550;
+  color: var(--delight-ink);
+}
+.day-ribbon-weather :is(.temp, .sky-temp) {
+  margin-left: 7px;
+  font-variant-numeric: tabular-nums;
+  color: var(--delight-warm);
+  font-size: 14px;
+  font-weight: 500;
+}
+.sky-caption {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--delight-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.day-ribbon-weather > .ui-icon:last-child,
+.day-ribbon-next > .ui-icon:last-child { width: 13px; height: 13px; color: var(--delight-faint); }
+.day-ribbon-next b,
+.day-ribbon-next strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 550;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.day-ribbon-next small,
+.day-ribbon-next time,
+.day-ribbon-next .sky-caption { display: block; font-size: 10px; color: var(--delight-muted); }
+.day-ribbon-next time { font-variant-numeric: tabular-nums; }
+.day-ribbon-next { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 9px; align-content: center; }
+.day-ribbon-next > .sky-next-caption { grid-column: 1; grid-row: 1; font-size: 11px; color: var(--delight-muted); white-space: nowrap; }
+.day-ribbon-next > b { grid-column: 1; grid-row: 2; }
+.day-ribbon-next > button[data-sky-calendar] { grid-column: 2; grid-row: 1 / 3; padding: 5px 8px; font-size: 11px; min-height: 32px; white-space: nowrap; }
+.day-ribbon-next > button[data-sky-meeting] { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; background: transparent; border: 0; box-shadow: none; min-height: 45px; padding: 0; text-align: left; width: 100%; min-width: 0; }
+.day-ribbon-next > button[data-sky-meeting] > b { max-width: 100%; }
+.day-ribbon-next > button[data-sky-meeting] > span { font-size: 11px; color: var(--delight-muted); }
+.day-ribbon-sun { display: flex; flex-direction: column; gap: 5px; }
+.sun-track {
+  position: relative;
+  width: min(130px, 100%);
+  height: 26px;
+  margin: 2px auto 0;
+  border-bottom: 1px solid #d6dfd1;
+}
+.sun-track::before {
+  content: '';
+  position: absolute;
+  inset: 0 5px -1px;
+  border: 1px dashed #cbd8c2;
+  border-bottom: 0;
+  border-radius: 80px 80px 0 0 / 34px 34px 0 0;
+  opacity: .8;
+  pointer-events: none;
+}
+.sun-orbit {
+  position: absolute;
+  z-index: 1;
+  left: clamp(0%, calc(var(--sun-progress, .5) * 100%), 100%);
+  bottom: -7px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--delight-solid);
+  transform: translate(-50%, -8px);
+  color: var(--delight-warm);
+  transition: left .8s var(--delight-glide), transform .8s var(--delight-glide);
+}
+.sun-orbit :is(svg, .ui-icon) { width: 17px; height: 17px; color: inherit; }
+@supports (transform: translateY(calc(sin(1rad) * 1px))) {
+  .sun-orbit { transform: translate(-50%, calc(-1 * sin(calc(var(--sun-progress, .5) * 180deg)) * 20px)); }
+}
+.sun-hours {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  width: min(145px, 100%);
+  margin: 0 auto;
+  font-size: 10px;
+  color: var(--delight-muted);
+  font-variant-numeric: tabular-nums;
+}
+body[data-day-phase=morning] { --delight-warm: #b89051; }
+body[data-day-phase=evening] { --delight-warm: #b78160; }
+body[data-day-phase=night] .sun-track { opacity: .75; }
+body[data-day-phase=night] .sun-orbit { color: var(--delight-muted); }
+
+/* The weather disclosure belongs to its ribbon, never to a separate full screen. */
+#skyPanel.sky-popover {
+  position: fixed;
+  z-index: 50;
+  top: 78px;
+  right: 24px;
+  width: min(360px, calc(100vw - 24px));
+  max-height: calc(100dvh - 96px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding: 19px 20px 17px;
+  border: 1px solid var(--delight-line);
+  border-radius: 18px;
+  background: var(--delight-solid);
+  box-shadow: var(--delight-shadow);
+  font-size: 12px;
+  color: var(--delight-ink);
+  animation: sky-panel-enter .22s var(--delight-glide);
+}
+.sky-popover::before {
+  content: '';
+  position: absolute;
+  height: 2px;
+  left: 20px;
+  right: 20px;
+  top: 0;
+  background: linear-gradient(90deg, transparent, var(--delight-accent-soft), transparent);
+  pointer-events: none;
+}
+.sky-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 15px; }
+.sky-panel-heading :is(h2, h3, b) { margin: 0; font-size: 14px; font-weight: 550; }
+.sky-panel-heading > button { min-height: 27px; width: 27px; padding: 5px; border: 0; background: var(--delight-soft); color: var(--delight-muted); }
+.sky-panel-heading > button :is(svg, .ui-icon) { width: 14px; height: 14px; }
+.sky-preferences { display: grid; gap: 14px; }
+.sky-preferences label { display: grid; gap: 6px; color: var(--delight-muted); font-size: 11px; }
+.sky-preferences :is(select, input:not([type=checkbox])) {
+  width: 100%;
+  min-height: 37px;
+  border-color: var(--delight-line);
+  border-radius: 9px;
+  background: var(--delight-soft);
+  color: var(--delight-ink);
+  padding: 7px 10px;
+  font-size: 12px;
+}
+.sky-mode-options { display: flex; gap: 4px; padding: 4px; border: 1px solid var(--delight-line); border-radius: 10px; background: var(--delight-soft); }
+.sky-mode-options > button { flex: 1; min-width: 0; min-height: 30px; padding: 5px 7px; border: 0; border-radius: 7px; background: transparent; font-size: 11px; color: var(--delight-muted); box-shadow: none; }
+.sky-mode-options > button:is(.active, [aria-pressed=true]) { background: var(--delight-solid); color: var(--delight-ink); box-shadow: 0 1px 4px #2237290a; }
+.sky-source { display: block; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--delight-line); font-size: 10px; color: var(--delight-muted); line-height: 1.8; overflow-wrap: anywhere; }
+.sky-source a { color: var(--delight-accent); text-decoration-color: var(--delight-line); text-underline-offset: 3px; }
+.sky-popover :is(p, .sky-detail) { line-height: 1.8; }
+@keyframes sky-panel-enter { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: none; } }
+
+/* Sun / moon labels remain present for keyboard and assistive technology users. */
+.top-end .sky-theme-toggle {
+  flex: 0 0 auto;
+  gap: 6px;
+  min-height: 36px;
+  padding: 4px 6px;
+  border-color: transparent;
+  background: transparent;
+  color: var(--delight-muted);
+  font-size: 11px;
+  box-shadow: none;
+}
+.sky-toggle-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 53px;
+  height: 28px;
+  flex: 0 0 auto;
+  padding: 4px 6px;
+  border: 1px solid #dce5d7;
+  border-radius: 20px;
+  background: #edf3e7;
+  box-shadow: inset 0 1px 3px #2b48220c;
+  isolation: isolate;
+}
+.sky-toggle-track::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 3px;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fffdf7;
+  box-shadow: 0 1px 3px #21372215;
+  transition: transform .4s var(--delight-glide), background .3s;
+}
+.sky-toggle-track :is(svg, .ui-icon) { width: 14px; height: 14px; color: #839174; }
+.sky-toggle-track i { display: grid; place-items: center; font-style: normal; }
+.sky-toggle-track .sun :is(svg, .ui-icon) { color: #a88c4d; }
+body[data-mail-theme=night] .sky-toggle-track { background: #35454b; border-color: #455b60; }
+body[data-mail-theme=night] .sky-toggle-track::before { transform: translateX(25px); background: #647a79; box-shadow: 0 1px 4px #0003; }
+body[data-mail-theme=night] .sky-toggle-track :is(svg, .ui-icon) { color: #829893; }
+body[data-mail-theme=night] .sky-toggle-track .moon :is(svg, .ui-icon) { color: #f2e7c4; }
+
+/* Expanding search reserves the remaining header width; other controls do not move. */
+.top #searchForm {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 1 56px;
+  width: 56px;
+  min-width: 56px;
+  max-width: 560px;
+  height: 42px;
+  margin-right: auto;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid #e4e9e0;
+  border-radius: 24px;
+  background: #f2f5ef;
+  box-shadow: none;
+  transition: width .4s var(--delight-glide), flex-basis .4s var(--delight-glide), border-color .2s, background .2s;
+}
+.top #searchForm:is(:focus-within, .is-open, .has-query) { flex-basis: 520px; width: 520px; border-color: #a9bea1; background: #fff; box-shadow: 0 0 0 3px #81a06d08; }
+@media (hover: hover) and (pointer: fine) {
+  .top #searchForm:hover { flex-basis: 520px; width: 520px; }
+}
+#searchForm .search-opening {
+  position: absolute;
+  z-index: 1;
+  inset: 0 auto 0 0;
+  width: 54px;
+  min-width: 54px;
+  min-height: 40px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--delight-muted);
+  border: 0;
+  border-radius: 24px;
+  box-shadow: none;
+}
+#searchForm .search-opening :is(svg, .ui-icon) { width: 18px; height: 18px; }
+#searchForm .search-opening:hover { background: transparent; color: var(--delight-accent); box-shadow: none; transform: none; }
+#searchForm .search-opening:focus-visible { outline: 2px solid var(--delight-accent); outline-offset: -5px; }
+#searchForm > span.muted { display: none; }
+.top #searchInput {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  margin: 0;
+  padding: 10px 6px 10px 56px;
+  visibility: hidden;
+  opacity: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  outline: 0;
+  font-size: 12px;
+  color: var(--delight-ink);
+  transition: opacity .16s ease-out;
+}
+#searchInput::placeholder { color: var(--delight-muted); }
+#searchForm > button:not(.search-opening) { flex: 0 0 auto; visibility: hidden; opacity: 0; white-space: nowrap; font-size: 11px; margin-right: 9px; padding: 5px 7px; min-height: 28px; border-radius: 7px; transition: opacity .16s ease-out; }
+#searchForm:is(:focus-within, .is-open, .has-query) :is(#searchInput, button:not(.search-opening)) { visibility: visible; opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  #searchForm:hover :is(#searchInput, button:not(.search-opening)) { visibility: visible; opacity: 1; }
+}
+.top .top-end { flex: 0 0 auto; margin-left: 0; }
+
+/* Only a deliberate click sends. Hover is visual feedback, never an action. */
+button.send-intent { position: relative; overflow: hidden; isolation: isolate; }
+.send-intent-window { position: relative; display: block; min-width: 4.5em; height: 20px; overflow: hidden; line-height: 20px; text-align: center; }
+.send-intent-window > span { display: block; width: 100%; line-height: 20px; white-space: nowrap; transition: none; }
+.send-hover-label { position: absolute; top: 100%; left: 0; pointer-events: none; }
+.send-charge { position: absolute; pointer-events: none; left: 12px; right: 12px; bottom: 5px; height: 1px; border-radius: 1px; background: #d8ead1; transform: scaleX(0); transform-origin: left; transition: none; opacity: .9; }
+@media (hover: hover) and (pointer: fine) {
+  button.send-intent:hover:not(:disabled):not(.is-submitting) .send-charge { transform: scaleX(1); transition: transform .7s linear; }
+  button.send-intent:hover:not(:disabled):not(.is-submitting) .send-intent-window > span { transform: translateY(-100%); transition: transform .22s var(--delight-glide) .7s; }
+}
+button.send-intent.is-submitting .send-charge,
+button.send-intent:disabled .send-charge { display: none; }
+button.send-intent.is-submitting .send-hover-label,
+button.send-intent:disabled .send-hover-label { display: none; }
+button.send-intent:is(.is-submitting, :disabled) .send-label { transform: none !important; transition: none; }
+button.send-intent.is-submitting { cursor: progress; }
+button.send-intent:focus-visible { outline: 3px solid #8eae81; outline-offset: 3px; }
+
+/* Selection settles into the paper rather than pulling the whole row around. */
+.mail-row { transition: background .22s ease, box-shadow .22s ease, border-color .22s ease; }
+.mail-row.selected {
+  background: linear-gradient(100deg, #eaf2e6, #f2f6ee 88%);
+  border-bottom-color: #dce7d7;
+  box-shadow: inset 3px 0 #8caa7d, inset 0 1px #fafff6;
+  animation: mail-selection-settle .24s ease-out;
+}
+.mail-row.selected:is(:hover, :active) { background: linear-gradient(100deg, #e7f0e2, #f0f5eb 88%); transform: none; }
+.mail-row.selected .sender { color: #354b39; }
+.mail-row.selected .subject { color: #48634a; }
+.complete-action { transition: color .2s, background .2s, border-color .2s, box-shadow .2s, transform .2s var(--delight-glide); }
+.complete-action:hover:not(:disabled) { box-shadow: 0 0 0 3px #739a720b, inset 0 1px #ffffff2b; }
+.complete-action:active:not(:disabled) { transform: scale(.92); }
+.is-done .complete-action .ui-icon { animation: completed-check-settle .28s var(--delight-glide); }
+.is-done .complete-action .ui-icon path { animation: completed-check-draw .3s ease-out; }
+.wc-dialog.paper-detail { border-radius: 23px; box-shadow: 0 16px 46px #1833221c, 0 2px 8px #18332208; animation: paper-detail-enter .26s var(--delight-glide); }
+.wc-dialog.paper-detail .wc-detail-meta { border-radius: 13px; }
+@keyframes mail-selection-settle { from { box-shadow: inset 1px 0 #a8bda0, inset 0 1px #fafff6; } to { box-shadow: inset 3px 0 #8caa7d, inset 0 1px #fafff6; } }
+@keyframes completed-check-settle { from { opacity: .4; transform: scale(.82); } to { opacity: 1; transform: scale(1); } }
+@keyframes completed-check-draw { from { stroke-dasharray: 30; stroke-dashoffset: 30; } to { stroke-dasharray: 30; stroke-dashoffset: 0; } }
+@keyframes paper-detail-enter { from { opacity: 0; transform: translateY(9px) scale(.99); } to { opacity: 1; transform: none; } }
+
+/* Night changes the entire workbench. Original mail HTML keeps its own colours. */
+body[data-mail-theme=night] {
+  --blue: #a5c7ae;
+  --ink: #e2ebe4;
+  --muted: #a5b3a9;
+  --line: #3c4b42;
+  --bg: #202a24;
+  --soft: #2e3c32;
+  --shadow: 0 6px 22px #101a160a;
+  --delight-surface: #2b372fee;
+  --delight-solid: #2b372f;
+  --delight-soft: #334237;
+  --delight-line: #435346;
+  --delight-ink: #e1eadd;
+  --delight-muted: #afbead;
+  --delight-faint: #809581;
+  --delight-accent: #b5cea7;
+  --delight-accent-soft: #4c6248;
+  --delight-warm: #d3b98a;
+  --delight-shadow: 0 9px 28px #101b1426, 0 1px 4px #101b141a;
+  background: var(--bg);
+  color: var(--ink);
+  color-scheme: dark;
+}
+body[data-mail-theme=night] .workspace { background: radial-gradient(ellipse at 92% 0, #5b746029, transparent 52%), var(--bg); }
+body[data-mail-theme=night] .top { background: #27322bf0; border-color: var(--line); }
+body[data-mail-theme=night] :is(.brand, .top-end #settingsTop) { color: #b5c0b6; }
+body[data-mail-theme=night] .search-key { color: #a5b1a6; border-color: #49544b; }
+body[data-mail-theme=night] .avatar { background: #3b4a3e; color: #c4d8ba; }
+body[data-mail-theme=night] button { background: #303d33; color: #d1ddd0; border-color: #47574a; box-shadow: none; }
+body[data-mail-theme=night] button:hover:not(:disabled) { background: #3b4c3e; border-color: #5d745e; box-shadow: none; }
+body[data-mail-theme=night] .ghost { background: transparent; border-color: transparent; }
+body[data-mail-theme=night] :is(button.primary, .top-end #writeTop) { background: linear-gradient(#cfdfc4, #b8cda9); border-color: #b8cda9; color: #263328; box-shadow: inset 0 1px #edf6e7, 0 2px 0 #6c8362, 0 5px 11px #1421141c; }
+body[data-mail-theme=night] :is(button.primary, .top-end #writeTop):hover:not(:disabled) { background: #d3e3c8; color: #263328; }
+body[data-mail-theme=night] .sidebar { background: linear-gradient(155deg, #242d29, #1c2521); }
+body[data-mail-theme=night] .sidebar .nav { color: #b6c1b9; background: transparent; border: 0; }
+body[data-mail-theme=night] .sidebar .nav:hover { background: #ffffff07; }
+body[data-mail-theme=night] .sidebar .nav.active { color: #eef4e8; background: #ffffff0b; }
+body[data-mail-theme=night] .sidebar .nav.active .glyph { color: #314834; background: #cbdcc1; border-color: #cbdcc1; }
+body[data-mail-theme=night] .day-ribbon { background: linear-gradient(105deg, #2f3c31, #2b372fee 62%); }
+body[data-mail-theme=night] .day-ribbon :is(.sky-caption, .sun-hours, .day-date) { color: #b8c8b0; font-size: 11px; }
+body[data-mail-theme=night] .sun-track { border-bottom-color: #617158; }
+body[data-mail-theme=night] .sun-track::before { border-color: #768565; }
+body[data-mail-theme=night] .sky-theme-toggle { background: transparent; border-color: transparent; color: var(--delight-muted); }
+body[data-mail-theme=night] .day-ribbon :is(.day-ribbon-weather, .day-ribbon-next) { background: transparent; color: var(--delight-ink); border-color: var(--delight-line); }
+body[data-mail-theme=night] .day-ribbon :is(.day-ribbon-weather, .day-ribbon-next):hover { background: var(--delight-soft); }
+body[data-mail-theme=night] .top #searchForm { background: #2d3b31; border-color: #465647; }
+body[data-mail-theme=night] .top #searchForm:is(:hover, :focus-within, .is-open, .has-query) { background: #344438; border-color: #6b8267; }
+body[data-mail-theme=night] #searchForm button { background: transparent; }
+body[data-mail-theme=night] :is(input, select, textarea, .rich-editor) { background: #27362d; color: #d9e6d6; border-color: #50624e; box-shadow: none; }
+body[data-mail-theme=night] :is(input, textarea)::placeholder { color: #9faf9a; opacity: 1; }
+body[data-mail-theme=night] :is(.panel, .action-center, .today-metrics, .calendar-large, .period-panel, .period-projects article, .empty, .date-popover, .compose-panel, .settings-drawer, .drawer, .contact-panel, .source-peek, .quick-panel) { background: #2b382f; border-color: #435347; box-shadow: var(--shadow); }
+body[data-mail-theme=night] :is(.today-metrics>div, .today-metrics>div:hover) { background: transparent; border-color: #435347; }
+body[data-mail-theme=night] :is(.metric-caption, .metric-unit, .workspace-heading .small, .workspace-sync .status, .workspace-sync #countdown, .workspace-heading .eyebrow, .focus-eyebrow, .brief-label>span, .board-heading p, .action-row-meta, .action-row-top .small, .source-subject, .action-state-hint, .deadline, .preview, .when, .detail-meta, .compose-status, .quick-scroll .field>span, .quick-source-note span, .quick-footer>span, .quick-result p, .settings-section small, .phrase-item p, .calendar-legend, .calendar-foot, .period-overview p, .recent-day small, .pulse-overview p) { color: #aab9a8; }
+body[data-mail-theme=night] :is(.workspace-heading h1, .today-metrics b, .board-heading h2, .brief-label, .action-content h3, .sender, .mail-row .subject, .detail-head h2, .quick-header h2, .quick-source-note b, .quick-result h3, .settings-header h2, .rail-heading h2, .period-heading h2, .period-projects h3, .calendar-month .month-title, .empty h2) { color: #dce8d6; }
+body[data-mail-theme=night] .workspace-heading > .actions > button { background: #384c34; border-color: #607656; color: #d5e5cb; box-shadow: inset 0 1px #ffffff08; }
+body[data-mail-theme=night] .workspace-heading > .actions > button:hover:not(:disabled) { background: #445d3d; border-color: #7a946a; color: #e3efdb; }
+body[data-mail-theme=night] .workspace-heading > .actions > button[data-export] { background: transparent; border-color: transparent; color: #b3c5a9; box-shadow: none; }
+body[data-mail-theme=night] .workspace-heading > .actions > button[data-export]:hover:not(:disabled) { background: #344631; color: #d7e6cd; }
+body[data-mail-theme=night] .today-focus { background: linear-gradient(120deg, #344430, #2e3d30); border-color: #5b6c4e; box-shadow: 0 3px 13px #1728190a; }
+body[data-mail-theme=night] .today-focus::before { background: linear-gradient(#be9585, #968e65); }
+body[data-mail-theme=night] .focus-item,
+body[data-mail-theme=night] .focus-item:hover:not(:disabled) { background: transparent; border: 0; color: #dce8d2; box-shadow: none; }
+body[data-mail-theme=night] .focus-item-top { color: #c1d3b6; }
+body[data-mail-theme=night] .focus-sender { color: #e0edda; }
+body[data-mail-theme=night] .focus-project { color: #bdd1b2; border-color: #5d7250; }
+body[data-mail-theme=night] .focus-type { color: #ddcaa1; }
+body[data-mail-theme=night] .focus-type.is-meeting { color: #cfbfdf; }
+body[data-mail-theme=night] .focus-item-top > time { color: #e5c7a3; }
+body[data-mail-theme=night] .focus-description { color: #e0ecd8; }
+body[data-mail-theme=night] .focus-description > .ui-icon { color: #a6bd98; }
+body[data-mail-theme=night] .focus-eyebrow { color: #b9ccab; }
+body[data-mail-theme=night] .focus-controls { color: #b6cba6; }
+body[data-mail-theme=night] .focus-controls > button { background: transparent; color: #c4d8b4; border: 0; box-shadow: none; }
+body[data-mail-theme=night] .focus-controls > button:hover:not(:disabled) { background: #475c3d; color: #e4f1da; }
+body[data-mail-theme=night] .focus-important { background: #62453d; color: #f5c9b9; }
+body[data-mail-theme=night] .focus-empty { color: #bccfae; }
+body[data-mail-theme=night] .meeting-strip,
+body[data-mail-theme=night] .meeting-strip.has-meetings { background: linear-gradient(115deg, #2c3b40, #2c3d36 70%); border-color: #4e6461; box-shadow: 0 4px 18px #17282108; }
+body[data-mail-theme=night] .meeting-emblem { background: #3b4e51; border-color: #586e70; color: #c8d9dd; box-shadow: inset 0 1px #ffffff08; }
+body[data-mail-theme=night] .meeting-strip-heading h2 { color: #e1ecda; }
+body[data-mail-theme=night] .meeting-strip-heading h2 > b { background: #4a6150; color: #dcead2; }
+body[data-mail-theme=night] .meeting-strip-heading .eyebrow { color: #b1c3b7; }
+body[data-mail-theme=night] .meeting-calendar-link { background: #3c5441; border-color: #5f7858; color: #d4e4ca; }
+body[data-mail-theme=night] .meeting-calendar-link:hover:not(:disabled) { background: #48664b; border-color: #7b956d; color: #e4f0da; }
+body[data-mail-theme=night] .meeting-strip-event { background: #354b3d; border-color: #526c4d; color: #dcebd1; box-shadow: inset 0 1px #ffffff04; }
+body[data-mail-theme=night] .meeting-strip-event:hover:not(:disabled) { background: #3d5742; border-color: #6a865d; color: #e8f3df; box-shadow: 0 4px 13px #17281812; }
+body[data-mail-theme=night] .meeting-strip-event > time { color: #dfc49b; }
+body[data-mail-theme=night] .meeting-strip-event > b { color: #e0ecd5; }
+body[data-mail-theme=night] .meeting-strip-event > span { color: #b5c9ab; }
+body[data-mail-theme=night] .meeting-strip-event > .ui-icon { color: #a5be96; }
+body[data-mail-theme=night] .meeting-clear { color: #b4c5b6; }
+body[data-mail-theme=night] .meeting-clear > button,
+body[data-mail-theme=night] .meeting-strip-more { background: transparent; color: #bfd2b1; border: 0; box-shadow: none; }
+body[data-mail-theme=night] .metric-symbol { background: #34463a !important; border-color: #4d6250; color: #b3c5a9 !important; box-shadow: inset 0 1px #ffffff08; }
+body[data-mail-theme=night] .brief-card { background: linear-gradient(115deg, #2c3b2e, #2d3b31); border-color: #4a5d45; }
+body[data-mail-theme=night] :is(.brief-card>p, .review-scroll, .full-review, .action-detail p, .quick-envelope p, .quick-envelope>b, .pulse-overview strong, .agenda-row>b, .settings-section summary, .phrase-item b) { color: #bacdb1; }
+body[data-mail-theme=night] :is(.brief-spark, .brief-label .brief-spark) { background: #3e533a !important; color: #c0d6b3 !important; border-color: #53674a !important; }
+body[data-mail-theme=night] :is(.brief-tags .tag, .brief-share, .tag, .kind-label, .kind-todo, .chip, .address-tag) { background: #3a4c39; color: #c2d7b4; border-color: #516347; }
+body[data-mail-theme=night] :is(.risk-summary, .banner, .quick-attachment-warning, .quick-check) { background: #463f2e; color: #dec89f; border-color: #66593e; }
+body[data-mail-theme=night] :is(.risk-summary summary, .risk-summary ul, .risk-summary summary span, .priority-label) { color: #d5c29c; }
+body[data-mail-theme=night] :is(.kind-confirm, .p1, .p2) { background: #51472f; color: #e1c99e; }
+body[data-mail-theme=night] .kind-reply { background: #35485a; color: #b5cbe6; }
+body[data-mail-theme=night] .kind-notice { background: #493d51; color: #ccb7d9; }
+body[data-mail-theme=night] .p0 { background: #573c3a; color: #efb4ad; }
+body[data-mail-theme=night] :is(.brief-footer, .full-review, .action-row+.action-row, .action-tabs, .board-tools, .board-footer, .detail-head, .calendar-caption, .calendar-foot, .period-panel, .settings-section, .settings-header, .phrase-item, .attachment-bar, .quick-files, .quick-footer, .quick-file, .divider) { border-color: #445644; }
+body[data-mail-theme=night] :is(.board-tools, .board-footer, .list-toolbar, .compose-footer, .settings-header, .settings-nav, .source-peek>header, .quick-header, .quick-footer, .body-display-tools) { background: #2d3b31; color: #bccbb5; border-color: #435547; }
+body[data-mail-theme=night] .action-state-tabs { background: #243229; border-color: #42563f; box-shadow: inset 0 1px 3px #1421151a; }
+body[data-mail-theme=night] .action-state-tabs>button { background: transparent; color: #a8bca3; border: 0; }
+body[data-mail-theme=night] .action-state-tabs>button.active { color: #e4f0dc; }
+body[data-mail-theme=night] .state-indicator { background: #40543c; box-shadow: 0 2px 4px #12201820, inset 0 1px #ffffff08; }
+body[data-mail-theme=night] :is(.action-tab, .segmented button, .quick-mode button, .settings-nav button) { background: transparent; color: #aebfa6; border-color: #42523d; }
+body[data-mail-theme=night] :is(.action-tab.active, .action-tab.active b, .segmented button.active, .quick-mode button.active, .settings-nav button.active, .folder.active, .calendar-picker button.selected) { background: #425a3d; color: #d6e7c7; border-color: #57714b; }
+body[data-mail-theme=night] :is(.action-tab b, .segmented, .quick-mode, .calendar-picker button) { background: #30412e; color: #b1c4a4; border-color: #465b3e; }
+body[data-mail-theme=night] :is(.action-row:hover, .action-row:focus-within, .mail-row:hover, .contact-row:hover) { background: #334632; }
+body[data-mail-theme=night] .complete-action { background: #2c3b2f; border-color: #617259; color: #bed2ad; box-shadow: inset 0 1px #ffffff0a; }
+body[data-mail-theme=night] .is-done .complete-action { background: #45613e; border-color: #637e54; color: #d9edcc; }
+body[data-mail-theme=night] .is-done h3 { color: #9bad95; text-decoration-color: #7e9770; }
+body[data-mail-theme=night] :is(.action-completed-label, .archive-selected h2, .archive-selected p, .recent-day>span, .pulse-row, .pulse-row b, .pulse-ring small, .calendar-year .year-title) { color: #acc29e; }
+body[data-mail-theme=night] :is(.source-link, .row-forward, .add-to-task) { background: #40593b !important; border-color: #65835c !important; color: #d6e8c9 !important; box-shadow: none; }
+body[data-mail-theme=night] :is(.source-link, .row-forward, .add-to-task):hover { background: #4b6845 !important; border-color: #7c9871 !important; }
+body[data-mail-theme=night] :is(.today-rail .panel, .pulse-panel) { background: #2b382f !important; }
+body[data-mail-theme=night] :is(.agenda-row, .pulse-track, .period-overview, .period-notes, .archive-ranges, .archive-mobile-nav, .settings-section, .account-item, .service-diagnostic, .about-app, .quick-source-note, .quick-contacts>button, .quick-phrases button, .attach) { background: #31432f; color: #bfd0b1; border-color: #4a6342; }
+body[data-mail-theme=night] :is(.writing-tools, .contact-left, .contact-row, .mailbox, .message-list, .mail-detail, .folders, .settings-section-body input:not([type=checkbox]), .settings-section-body select, .settings-section-body textarea, .compose-panel input, .compose-panel select, .quick-scroll input, .quick-scroll select, .quick-scroll textarea, .service-diagnostic textarea) { background: #29382d; color: #d3e0c9; border-color: #4b6144; }
+body[data-mail-theme=night] :is(.writing-tools button, .file-button, .quick-files>.file-button, .source-peek>header button, .calendar-month>button, .archive-ranges button, .range-date>button, .date-popover>header button, .date-popover>footer button, .period-heading>button, .settings-intro>button, .board-heading>button, .board-footer button, .calendar-caption .archive-count) { background: #374a32; color: #c2d5b3; border-color: #536b48; box-shadow: inset 0 1px #ffffff08; }
+body[data-mail-theme=night] .mail-row { background: transparent; border-color: #435345; }
+body[data-mail-theme=night] .mail-row.selected { background: linear-gradient(100deg, #40593c, #354c31 88%); border-color: #56714b; box-shadow: inset 3px 0 #c0d3a7, inset 0 1px #ffffff07; animation: none; }
+body[data-mail-theme=night] .mail-row.selected:is(:hover, :active) { background: linear-gradient(100deg, #486341, #3a5335 88%); }
+body[data-mail-theme=night] .mail-row.selected :is(.sender, .subject) { color: #e4efd8; }
+body[data-mail-theme=night] .mail-row.selected .preview { color: #c1d2b4; }
+body[data-mail-theme=night] .calendar-large .date-btn { background: transparent; color: #b7c8ac; }
+body[data-mail-theme=night] .calendar-large .date-btn:hover:not(:disabled) { background: #435b3b; color: #e5efda; }
+body[data-mail-theme=night] .calendar-large .date-btn.selected { background: #c3d5ae; color: #2b3c26; box-shadow: 0 2px 0 #8ea07a; }
+body[data-mail-theme=night] .calendar-large .date-btn.today:not(.selected) { background: #334a2e; outline-color: #80986c; color: #d1e2be; }
+body[data-mail-theme=night] :is(.calendar-large .weekday, .calendar-month .month-title small, .calendar-caption .eyebrow, .calendar-foot button) { color: #a9bd9c; }
+body[data-mail-theme=night] :is(.source-peek-wrap, .quick-overlay, .contact-overlay, .settings-wrap, .drawer-wrap, .wc-modal-backdrop) { background: #111c155c; }
+body[data-mail-theme=night] .toast { background: #35482ff5; border-color: #617c52; color: #e0ecd2; box-shadow: 0 6px 24px #12201224; }
+body[data-mail-theme=night] .toast>button { background: transparent; color: #c4e2ac; }
+body[data-mail-theme=night] .work-calendar-page {
+  --wc-bg: #24312a; --wc-surface: #2d3c32f5; --wc-ink: #dfebd9;
+  --wc-muted: #b1c3a8; --wc-faint: #819c76; --wc-line: #496240;
+  --wc-soft: #344b2f; --wc-accent: #bfd7aa; --wc-accent-soft: #4c6b40;
+  --wc-glow: #71896220; --wc-meeting: #b6cde5; --wc-meeting-bg: #354b5b;
+  --wc-deadline: #dfc293; --wc-deadline-bg: #4d4734; --wc-task: #c1d7b1;
+  --wc-task-bg: #3e5635; --wc-holiday: #f1b6b6; --wc-holiday-bg: #4d3b3b;
+  --wc-holiday-hover: #5e4444; --wc-holiday-chip: #765151;
+}
+body[data-mail-theme=night] .work-calendar-page button.primary { background: var(--wc-accent); color: #263a24; border-color: var(--wc-accent); }
+body[data-mail-theme=night] .wc-dialog.paper-detail { box-shadow: 0 16px 44px #101c1530, 0 1px 4px #101c1520; }
+body[data-mail-theme=night] :is(.mail-html-frame, .quick-preview iframe) { background: #fff; color-scheme: light; filter: none; }
+body[data-mail-theme=night] :is(.mail-row, .message-list, .list-toolbar, .detail-head) { border-color: #435345; }
+body[data-mail-theme=night] ::-webkit-scrollbar-thumb { background-color: #6b7e63; }
+
+/* Two small rows on narrow windows, still centred on the useful next action. */
+@media (max-width: 1190px) {
+  .day-ribbon { grid-template-columns: minmax(120px, .85fr) minmax(145px, 1fr) minmax(130px, .95fr) minmax(150px, 1.15fr); }
+  .day-ribbon > :is(div, button) { padding-left: 11px; padding-right: 11px; }
+  .top-end .sky-theme-toggle > span:not(.sky-toggle-track) { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+  .top .top-end { gap: 7px; }
+  .top .search-key { display: none; }
+}
+@media (max-width: 960px) {
+  .day-ribbon { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 9px; padding: 11px 5px; }
+  .day-ribbon > :is(div, button) { padding-left: 14px; padding-right: 14px; }
+  .day-ribbon > :is(div, button):nth-child(3) { border-left: 0; }
+  .day-ribbon > :is(div, button):nth-child(n+3) { padding-top: 10px; border-top: 1px solid var(--delight-line); }
+  .day-ribbon-sun { min-height: 53px; }
+  .day-ribbon .sun-track { margin-left: 10px; margin-right: 10px; }
+  .day-ribbon .sun-hours { margin-left: 0; margin-right: 0; }
+  .top #searchForm { height: 39px; }
+  .top #searchForm:is(:focus-within, .is-open, .has-query) { flex-basis: 330px; width: 330px; }
+  #searchForm .search-opening { min-height: 37px; }
+  .top #searchInput { height: 37px; font-size: 11px; }
+  #searchForm > button:not(.search-opening) { font-size: 10px; margin-right: 5px; padding: 4px 5px; }
+}
+@media (max-width: 700px) {
+  .day-ribbon { margin-bottom: 18px; border-radius: 14px; }
+  .day-clock { font-size: 17px; }
+  .day-ribbon-next b { font-size: 11px; }
+  .day-ribbon > :is(div, button) { padding-left: 11px; padding-right: 11px; }
+  .top { gap: 7px; }
+  .top .top-end { gap: 3px; }
+  .top-end .sky-theme-toggle { padding: 3px 2px; }
+  .sky-toggle-track { width: 49px; height: 26px; padding: 3px 5px; }
+  .sky-toggle-track::before { width: 18px; height: 18px; }
+  body[data-mail-theme=night] .sky-toggle-track::before { transform: translateX(23px); }
+  .sky-toggle-track :is(svg, .ui-icon) { width: 13px; height: 13px; }
+  .top #searchForm { min-width: 48px; width: 48px; flex-basis: 48px; height: 36px; }
+  .top #searchForm:is(:focus-within, .is-open, .has-query) { flex-basis: 270px; width: 270px; }
+  #searchForm .search-opening { min-height: 34px; width: 46px; min-width: 46px; }
+  .top #searchInput { padding-left: 44px; height: 34px; }
+  #searchForm > button:not(.search-opening) { margin-right: 4px; padding: 4px; }
+  .sky-popover { width: min(325px, calc(100vw - 35px)); padding: 17px; border-radius: 16px; }
+  #skyPanel.sky-popover { top: 68px; right: 12px; width: min(360px, calc(100vw - 24px)); }
+  .wc-dialog.paper-detail { border-radius: 21px; }
+}
+@media (max-width: 480px) {
+  .day-ribbon { font-size: 11px; margin-top: -5px; }
+  .day-ribbon > :is(div, button) { padding-left: 9px; padding-right: 9px; }
+  .day-ribbon-time { column-gap: 5px; }
+  .day-ribbon-weather, .day-ribbon-next { gap: 5px; }
+  .day-ribbon-weather :is(.temp, .sky-temp) { margin-left: 4px; font-size: 13px; }
+  .day-ribbon :is(.ui-icon, svg) { width: 15px; height: 15px; }
+  .sky-caption { font-size: 10px; }
+  .sun-track { width: min(108px, 100%); }
+  .sun-hours { font-size: 9px; }
+  .top #searchForm { min-width: 42px; width: 42px; flex-basis: 42px; }
+  .top #searchForm:is(:focus-within, .is-open, .has-query) { flex-basis: 220px; width: 220px; }
+  #searchForm .search-opening { width: 40px; min-width: 40px; }
+  .top #searchInput { padding-left: 37px; padding-right: 3px; }
+  #searchForm > button:not(.search-opening) { max-width: 40px; padding: 3px; font-size: 10px; }
+  .top .brand { width: 26px; gap: 0; }
+  .top .brand > button { width: 26px; min-height: 30px; padding: 4px; }
+  .top .top-end #writeTop { width: 32px; min-height: 33px; padding: 7px; font-size: 0; gap: 0; }
+  .top .top-end #writeTop .ui-icon { width: 16px; height: 16px; }
+}
+
+/* Keep every function available while removing physical and repeating motion. */
+@media (prefers-reduced-motion: reduce) {
+  body *, body *::before, body *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .send-charge, .send-hover-label { display: none !important; }
+  .send-intent-window > .send-label { transform: none !important; }
+  .mail-row.selected, .complete-action, .wc-dialog.paper-detail { animation: none !important; }
+  .complete-action:active, button.primary:hover, button.primary:active, .writing-tools button:hover, .writing-tools button:active,
+  .sidebar .nav .glyph, .sidebar .nav:hover .glyph, .sidebar .nav:hover+.nav .glyph, .sidebar .nav:has(+.nav:hover) .glyph,
+  .calendar-large .date-btn:hover, .meeting-strip-event:hover { transform: none !important; }
+}
+
+/* Keep the month's current row visible: context stays compact above the calendar. */
+.work-calendar-page .wc-heading{margin-bottom:17px}
+.work-calendar-page .day-ribbon{margin-bottom:14px;padding-top:7px;padding-bottom:7px}
+.wc-daily-notes{margin-bottom:14px}
+.wc-daily-notes-heading .wc-holiday-card{max-width:none;margin:0 auto;padding:0 9px;border:0;border-radius:0;background:none;box-shadow:none;gap:7px}
+.wc-daily-notes-heading .wc-holiday-mark{width:22px;height:22px;background:transparent}
+.wc-daily-notes-heading .wc-holiday-card b{font-size:11px;font-weight:550}
+.wc-daily-notes-heading .wc-holiday-card>div{flex-direction:row;align-items:center;gap:9px}
+.wc-daily-notes-heading .wc-holiday-card>div>span{font-size:10px}
+.wc-daily-notes-heading .wc-holiday-card>button{width:18px;height:18px;min-height:18px}
+@media(min-width:1000px){.wc-month-grid{grid-template-rows:repeat(var(--wc-weeks),minmax(110px,1fr));min-height:calc(var(--wc-weeks)*110px)}.wc-toolbar{padding:19px 23px 12px}.wc-sub-toolbar{padding-bottom:13px}.wc-daily-note{padding-top:9px;padding-bottom:8px}}
+@media(max-width:760px){.wc-daily-notes-heading{flex-wrap:wrap}.wc-daily-notes-heading .wc-holiday-card{order:3;flex-basis:100%;justify-content:flex-start;padding-left:0;margin-top:0}.wc-daily-notes-heading .wc-holiday-card>div{flex-direction:row;flex-wrap:wrap;gap:2px 9px}}
+
+.work-calendar-page .day-ribbon-next{display:none}
+@media(min-width:1000px){.work-calendar-page .day-ribbon{grid-template-columns:minmax(145px,.85fr) minmax(210px,1.15fr) minmax(230px,1fr)}}
+@media(max-width:999px){.work-calendar-page .day-ribbon-sun{grid-column:1/-1;border-left:0;border-top:1px solid var(--delight-line);padding-top:6px}.work-calendar-page .day-ribbon{row-gap:5px}}
